@@ -24,7 +24,8 @@ source and retains the official MIT license in `LICENSE`.
    and `pnpm test`. A Host API or DTO change must complete the full build so
    Typert regenerates and verifies the Client contract before the Vite UI is
    rebuilt.
-5. Run `docker compose up -d --build`, verify the health check and
+5. Update `deploy/docker/Dockerfile`'s `DSH_CLIENT_COMMIT_HASH` build argument
+   to the chosen upstream commit, then run `docker compose up -d --build`, verify the health check and
    `http://127.0.0.1:3080/`, then commit the exact source and Docker reference
    revisions here.
 

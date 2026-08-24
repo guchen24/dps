@@ -1,7 +1,13 @@
 FROM node:24-bookworm-slim AS build
 
+ARG DSH_CLIENT_COMMIT_HASH=b150a55
+
 ENV PNPM_HOME=/pnpm
 ENV PATH=${PNPM_HOME}:${PATH}
+# The official build embeds this pinned upstream baseline in browser artifacts.
+# Passing an explicit value keeps source images reproducible without copying
+# Git metadata into the build context.
+ENV DSH_CLIENT_COMMIT_HASH=${DSH_CLIENT_COMMIT_HASH}
 
 WORKDIR /opt/dps
 
