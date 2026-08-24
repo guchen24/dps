@@ -1,0 +1,9 @@
+.git
+.env
+node_modules
+.pnpm-store
+apps/web/dist
+.dsh-build
+.artifacts
+coverage
+*.log
