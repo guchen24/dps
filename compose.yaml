@@ -10,6 +10,7 @@ services:
     environment:
       DSH_HOME: /home/node/.dsh
       DSH_TELEMETRY_DISABLED: "1"
+      NODE_OPTIONS: --expose-internals
     ports:
       - "127.0.0.1:${DSH_PORT:-3080}:3080"
     volumes:
