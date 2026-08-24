@@ -1,5 +1,6 @@
 .git
 .env
+docker/.env
 node_modules
 .pnpm-store
 apps/web/dist
