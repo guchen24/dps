@@ -43,6 +43,9 @@ ENV DSH_HOME=/home/node/.dsh
 ENV HOME=/workspace
 ENV NODE_ENV=production
 
+RUN mkdir -p "${DSH_HOME}" \
+  && chown -R node:node /home/node
+
 WORKDIR /opt/dps
 COPY --from=build --chown=node:node /opt/dps /opt/dps
 COPY --chmod=755 deploy/docker/entrypoint.sh /usr/local/bin/dps-entrypoint
