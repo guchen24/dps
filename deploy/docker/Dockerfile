@@ -22,6 +22,11 @@ COPY . .
 RUN --mount=type=cache,id=dps-pnpm-store,target=/pnpm/store \
   pnpm install --frozen-lockfile
 
+# Loader plugins are selected dynamically from the composed Host tree. pnpm's
+# isolated workspace links are package-local, so expose the official workspace
+# packages at the root resolution boundary used by that dynamic loader.
+RUN node deploy/docker/link-runtime-workspaces.mjs
+
 # This produces Host artifacts first, then generated Client/Typert contracts,
 # then the Vite Web UI. It is deliberately not replaced by a Vite-only build.
 RUN pnpm run build
