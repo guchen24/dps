@@ -9,6 +9,12 @@ LAN. Harness sessions, configuration, and credentials persist in the named
 `dps-dsh-home` volume. The prior `dsh-data` volume is intentionally neither
 mounted nor removed by this deployment.
 
+The default `DSH_WORKSPACE=./workspace` is deliberately separate from this
+deployment checkout: Harness reads a workspace `.env`, while this checkout's
+`.env` contains protected launch-time settings such as `DEEPSEEK_API_KEY`.
+Point `DSH_WORKSPACE` to another project only when its own `.env` does not
+declare those protected launch-time variables.
+
 For source development, install dependencies and run the full build before
 starting the Web profile:
 
