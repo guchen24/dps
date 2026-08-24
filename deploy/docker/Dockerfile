@@ -5,7 +5,10 @@ ENV PATH=${PNPM_HOME}:${PATH}
 
 WORKDIR /opt/dps
 
-RUN corepack enable \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends git \
+  && rm -rf /var/lib/apt/lists/* \
+  && corepack enable \
   && corepack prepare pnpm@11.7.0 --activate
 
 COPY . .
