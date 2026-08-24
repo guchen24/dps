@@ -14,7 +14,7 @@
 import { writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { FiberState, type Context } from '@deepseek-ai/cordis'
+import { type Context, type FiberState } from '@deepseek-ai/cordis'
 import type { PatchOptions } from '@deepseek-ai/cordis-plugin-include'
 import type { EntryOptions } from '@deepseek-ai/cordis-plugin-loader'
 import {
@@ -39,6 +39,9 @@ import { provideCmdline } from '@deepseek-ai/dsh-cmdline'
 import { createProcessShutdown, type ProcessShutdown } from './process-shutdown.ts'
 
 const NAME = 'dsh'
+// FiberState is a const enum and has no JavaScript export. Keep this value
+// type-bound so the source CLI also works through the tsx development loader.
+const FIBER_ACTIVE = 2 as FiberState.ACTIVE
 
 /**
  * The home-level user patch layer (`$DSH_HOME/cordis.patch.yml`), applied
@@ -194,7 +197,7 @@ export interface RunProfileOptions {
  */
 function suppressShutdownError(ctx: Context, signal: AbortSignal, error: unknown): void {
   if (signal.aborted) return
-  if (ctx.fiber.state !== FiberState.ACTIVE || ctx.get('loader') === undefined) return
+  if (ctx.fiber.state !== FIBER_ACTIVE || ctx.get('loader') === undefined) return
   throw error
 }
 
@@ -266,7 +269,7 @@ export async function runProfile(options: RunProfileOptions): Promise<{ ctx: Con
   // through its bounded shutdown, which disposes the watchers before the
   // loop drains.
   if (!signalShutdown.signal.aborted
-    && ctx.fiber.state === FiberState.ACTIVE
+    && ctx.fiber.state === FIBER_ACTIVE
     && ctx.get('loader') !== undefined) {
     try {
       // Config-only HMR for the live profile patch layer: the web bundle
