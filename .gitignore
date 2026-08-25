@@ -2,6 +2,7 @@ CLAUDE.local.md
 /.env
 /docker/.env
 /src-tauri/target/
+/src-tauri/gen/
 node_modules/
 lib/
 *.tsbuildinfo

@@ -6,10 +6,10 @@ authors = ["dps contributors"]
 edition = "2021"
 
 [build-dependencies]
-tauri-build = { version = "2.11", features = [] }
+tauri-build = { version = "2.6.3", features = [] }
 
 [dependencies]
-tauri = { version = "2.11", features = [] }
+tauri = { version = "2.6.3", features = [] }
 reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"] }
 tokio = { version = "1", features = ["time"] }
 serde = { version = "1", features = ["derive"] }

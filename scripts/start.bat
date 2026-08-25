@@ -4,7 +4,8 @@ setlocal EnableExtensions EnableDelayedExpansion
 set "ROOT=%~dp0.."
 for %%I in ("%ROOT%") do set "ROOT=%%~fI"
 set "DOCKER_DIR=%ROOT%\docker"
-set "EXE=%ROOT%\src-tauri\target\release\DeepSeek Harness Desktop.exe"
+rem Cargo uses the Rust package name for the unpackaged executable.
+set "EXE=%ROOT%\src-tauri\target\release\deepseek-harness-desktop.exe"
 
 where docker >nul 2>nul
 if errorlevel 1 (

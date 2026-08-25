@@ -11,7 +11,7 @@ const BACKEND_URL: &str = "http://127.0.0.1:3080/";
 const RETRY_INTERVAL: Duration = Duration::from_secs(3);
 const RETRY_COUNT: usize = 20;
 
-#[derive(Serialize)]
+#[derive(Clone, Serialize)]
 struct BackendEvent<'a> {
     status: &'a str,
     url: &'a str,
